@@ -21,8 +21,8 @@ export default function OrderSummary({
   grand_total: number;
 }) {
   return (
-    <div className="lg:py-21 relative col-span-full flex flex-col bg-gray-100 py-6 pl-8 pr-4 sm:py-12  lg:col-span-5">
-      <h2 className="text-black">Order summary</h2>
+    <div className="lg:py-21 relative col-span-full flex flex-col bg-custom-100 py-6 pl-8 pr-4 sm:py-12  lg:col-span-3">
+      <h2 className="text-gray-800 font-semibold">Order summary</h2>
 
       <div className="relative max-w-md">
         <ul className="space-y-5">
@@ -38,19 +38,23 @@ export default function OrderSummary({
               type="text"
               name="mail"
               className=" h-9 w-full rounded border px-2 text-xs placeholder:text-zinc-500 focus:border-gray-500 focus:outline-none"
-              placeholder="Coupon code"
+              placeholder="Gift Card/Discount code"
             />
             <button
               type="button"
-              className=" rounded bg-zinc-700 px-5 py-2 text-sm font-medium text-white hover:bg-zinc-800 focus:outline-none focus:ring-4 focus:ring-zinc-300 dark:bg-zinc-600 dark:hover:bg-zinc-700 dark:focus:ring-zinc-900"
+              className=" rounded bg-custom-200 px-5 py-2 text-sm font-medium text-white hover:bg-custom-200 "
             >
               Apply
             </button>
           </div>
           <hr className="pb-2" />
         </div>
-        <div className="space-y-2">
-          <p className="flex justify-between text-sm  text-black">
+        <div className="space-y-4">
+         <p className="flex justify-between text-sm  text-black">
+            <span>Discount</span>
+            <span>({getPrice(discount_total, 'AUD')})</span>
+          </p>
+           <p className="flex justify-between text-sm  text-black">
             <span>Subtotal</span>
             <span>{getPrice(sub_total, 'AUD')}</span>
           </p>
@@ -58,10 +62,7 @@ export default function OrderSummary({
             <span>Shipping</span>
             <span className="text-xs font-light">—</span>
           </p>
-          <p className="flex justify-between text-sm  text-black">
-            <span>Discount</span>
-            <span>({getPrice(discount_total, 'AUD')})</span>
-          </p>
+          
           <hr />
 
           {promotions.count > 0 &&
@@ -88,28 +89,6 @@ export default function OrderSummary({
         </div>
       </div>
 
-      <div className="relative mt-10 text-black">
-        <h3 className="mb-5 text-lg font-bold">Support</h3>
-        <p className="text-sm font-semibold">
-          +01 234 456 789 <span className="font-light">(International)</span>
-        </p>
-        <p className="mt-1 text-sm font-semibold">
-          support@example.com <span className="font-light">(Email)</span>
-        </p>
-        <p className="mt-2 text-xs font-medium">
-          Call us now for payment related issues
-        </p>
-      </div>
-      <div className="relative mt-10 flex">
-        <p className="flex flex-col">
-          <span className="text-sm font-bold text-black">
-            Money Back Guarantee
-          </span>
-          <span className="text-xs font-medium text-black">
-            within 30 days of purchase
-          </span>
-        </p>
-      </div>
     </div>
   );
 }

@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import type { Cart } from 'swell-js';
 import swell from 'swell-js';
 
-import CheckoutForm from '@/components/form';
+import CustomerForm from '@/components/form';
+import ShippmentForm from '@/components/shippment';
+import PaymentForm from '@/components/payment';
+
 import Loader from '@/components/loading';
 import OrderSummary from '@/components/order_summary';
 import { Meta } from '@/layouts/Meta';
@@ -14,6 +18,8 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
     process.env.NEXT_SWELL_PUBLIC_API_TOKEN as string
   );
 
+
+  
   // Initialize the client first
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,6 +32,75 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
     });
     setLoading(false);
   }, []);
+
+   // Use state variables to track the current step
+   const [currentStep, setCurrentStep] = useState(1);
+
+   // Function to navigate to the next step
+   const handleNext = () => {
+     setCurrentStep(currentStep + 1);
+   };
+ 
+   // Function to navigate to the previous step
+   const handlePrev = () => {
+     setCurrentStep(currentStep - 1);
+   };
+
+   
+  // Render the appropriate step based on the current step
+  let stepContent;
+  switch (currentStep) {
+    case 1:
+      stepContent = (
+        <div className=''>
+          {/* Customer information form */}
+          <CustomerForm />
+          <div className='flex justify-between mt-5'>
+          <button  
+            className="h-12 w-24 text-xs font-medium text-custom-200"
+            >Return To home</button>
+          <button
+            className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
+            onClick={handleNext}>Continue to Shipping</button>
+        </div>
+        </div>
+      );
+      break;
+    case 2:
+      stepContent = (
+        <div>
+          {/* Shipping information form */}
+          <ShippmentForm />
+          <div className='flex justify-between mt-5'>
+          <button 
+          className="h-12 w-24 text-xs font-medium text-custom-200"
+          onClick={handlePrev}>Back</button>
+          <button 
+          className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
+          onClick={handleNext}>Continue To Payment</button>
+        </div>
+        </div>
+      );
+      break;
+    case 3:
+      stepContent = (
+        <div>
+          {/* Payment form */}
+          <PaymentForm />
+          <div className='flex justify-between mt-5'>
+          <button 
+          className="h-12 w-24 text-xs font-medium text-custom-200"
+          onClick={handlePrev}>Back</button>
+          <button 
+          className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
+          onClick={handleNext}>Complete Order</button>
+        </div>
+        </div>
+      );
+      break;
+    default:
+      stepContent = null;
+  }
 
   return (
     <Main
@@ -48,42 +123,49 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
       )}
 
       <div className="relative bg-white">
-        <div className="mx-auto grid min-h-screen grid-cols-12">
-          <div className="mx-auto mr-6  py-6 sm:py-12 lg:col-span-3 lg:col-start-4">
+        <div className="mx-auto grid min-h-screen grid-cols-12 ">
+          <div className="mx-auto mr-6  py-6 sm:py-12 lg:col-span-4 lg:col-start-4 bg-white p-10">
             <div className="ml-auto w-full">
-              <h1 className="relative text-center text-2xl font-medium text-gray-700 sm:text-3xl">
-                Londinium
-              </h1>
-              <div className="flex flex-wrap items-center justify-center text-xs">
-                <ul className="flex items-center gap-2">
-                  <li className="inline-flex items-center">
-                    <a href="#" className="text-gray-900 hover:text-gray-900">
-                      Customer Information
-                    </a>
-                    <span className="ml-2 h-auto font-medium text-gray-400">
-                      /
-                    </span>
-                  </li>
+              <img className='content-center	 p-2 w-80 h-24 object-center'  src='/assets/images/logo.jpg' alt='logo' ></img>
+              <div className='mt-3' >
+                <hr className=" w-full border-gray-400" />
+                {/* Circles for eachstep */}
+                <div className="flex justify-between items-center -mt-3 ">
+                <div className={`w-6 h-6 rounded-full ${ currentStep >= 1 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                <div className={`w-6 h-6 rounded-full ${ currentStep >= 2 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                <div className={`w-6 h-6 rounded-full ${ currentStep >= 3 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                </div>
 
-                  <li className="inline-flex items-center">
-                    <a href="#" className="text-gray-600 hover:text-gray-900">
-                      Shipping Method
-                    </a>
 
-                    <span className="ml-2 h-auto font-medium text-gray-400">
-                      /
-                    </span>
-                  </li>
-
-                  <li className="inline-flex items-center">
-                    <a href="#" className=" text-gray-600 hover:text-gray-900">
-                      Payment Method
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <CheckoutForm />
+                  {/* Header with navigation links */}
+                    <ul className="flex justify-between items-center text-lg font-medium">
+                        <li
+                          className={`cursor-pointer ${
+                            currentStep === 1 ? 'text-gray-900' : 'text-gray-500'
+                          }`}
+                        >
+                          Customer
+                        </li>
+                          <li
+                            className={`cursor-pointer ${
+                              currentStep === 2 ? 'text-gray-900' : 'text-gray-500'
+                            }`}
+                          >
+                            Shipping
+                          </li>
+                          <li
+                            className={`cursor-pointer ${
+                              currentStep === 3 ? 'text-gray-900' : 'text-gray-500'
+                            }`}
+                          >
+                            Payment
+                          </li>
+                    </ul>
+                </div>
+     {/* Header with navigation links */}
+          <div>
+            {stepContent}
+          </div>
             </div>
           </div>
           {cart !== null && <OrderSummary {...cart} />}

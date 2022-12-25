@@ -21,12 +21,12 @@ export default function OrderSummaryItem({
             'https://londiniumespresso.com/store/image/cache/catalog/all-machines/londinium-R24-2021-800x800.jpg'
           }
           alt=""
-          className="max-h-16 rounded-md"
+          className="h-16 w-16 rounded-md"
         />
         <div className="ml-3">
-          <p className="text-base font-semibold text-black">{product.name}</p>
+          <p className="text-base font-semibold text-gray-800">{product.name}</p>
           {variant?.name && (
-            <p className="text-sm font-medium text-black text-opacity-80">
+            <p className="text-sm font-medium text-gray-800 text-opacity-80">
               {variant.name}
             </p>
           )}
