@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import  { useState } from "react";
 import React  from 'react'
 import Splitdelivery from "./splitdelivery";
 import type { CartItem, ListResult } from 'swell-js';
@@ -6,9 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
-import { getPrice } from '@/utils/product';
 
-function shippment({ items, discount_total,  sub_total,  grand_total,  tax_total,  promotions,}: {  items: Array<CartItem>;  discount_total: number;  total: number;  sub_total: number; tax_total: number;promotions: ListResult<any>; grand_total: number;}) {
+function shippment({ items,}: {  items: Array<CartItem>;  discount_total: number;  total: number;  sub_total: number; tax_total: number;promotions: ListResult<any>; grand_total: number;}) {
   
   const [instruction, setInstruction] = useState('');
   const dispatch = useDispatch();

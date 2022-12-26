@@ -1,6 +1,5 @@
 import React from 'react'
-import  { useState , useEffect } from "react";
-import Swell, { CartItem, ListResult } from 'swell-js';
+
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -22,7 +21,6 @@ function payment() {
   const countrystate = useSelector(state =>   state.country);
   const phonestate     = useSelector(state => state.phonenumber);
   const instructionstate     = useSelector(state => state.instruction);
-  const shipmentOptions = useSelector(state => state.shipmentOptions.shipmentType) ;
 
 
 
@@ -50,12 +48,7 @@ value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystat
 
 
  
-
-  const [paymentMethod, setPaymentMethod] = useState("");
-
-  const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
-    setPaymentMethod(event.target.value);
-  };
+;
 
   
 

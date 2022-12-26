@@ -9,7 +9,6 @@ import PaymentForm from '@/components/payment';
 
 import Loader from '@/components/loading';
 import OrderSummary from '@/components/order_summary';
-import OrderSummaryForshipment from '@/components/order_summary For_Shippment';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 import { useSelector } from 'react-redux';

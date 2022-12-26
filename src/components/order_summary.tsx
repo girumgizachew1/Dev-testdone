@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import type { CartItem, ListResult } from 'swell-js';
 import { getPrice } from '@/utils/product';
 import OrderSummaryItem from './order_summary_item';

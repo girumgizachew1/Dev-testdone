@@ -1,14 +1,9 @@
 import type { Product, ProductVariant } from 'swell-js';
 
 import { getPrice } from '@/utils/product';
-import { INSPECT_MAX_BYTES } from 'buffer';
-import { useSelector, useDispatch } from 'react-redux';
-import shippment from './shippment';
 
 
 export default function OrderSummaryItem({length,  product,  price, variant, index,}: { item: object; product: Product;variant: ProductVariant; price: number;  length: number; index: number;}) {
-  const id= product.id
-  const shipmentOptions = useSelector((state: State) => state.shipmentOptions[id]) ;
 
   
   return (

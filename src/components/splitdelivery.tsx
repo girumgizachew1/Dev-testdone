@@ -1,14 +1,11 @@
 import React from 'react'
 import  { useState } from "react";
 import type { Product, ProductVariant } from 'swell-js';
-import { getPrice } from '@/utils/product';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 function splitdelivery({
   product,
-  price,
-  variant,
   index, 
   length
 }: {
