@@ -1,24 +1,54 @@
 import React from 'react'
 import  { useState , useEffect } from "react";
-import Swell from 'swell-js';
+import Swell, { CartItem, ListResult } from 'swell-js';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 function payment() {
-  const currentStepaccepted = useSelector(state => state.currentStep);
   const dispatch = useDispatch();
 
+
+  
+  const currentStepaccepted = useSelector(state => state.currentStep);
+  const firstNamestate = useSelector(state => state.firstName);
+  const lastNamestate  = useSelector(state => state.lastName);
+  const companystate   = useSelector(state => state.company);
+  const addressstate   = useSelector(state => state.address);
+  const apartmentstate = useSelector(state => state.apartment);
+  const emailstate     = useSelector(state => state.email);
+  const zipcodestate  = useSelector(state =>  state.zipcode);
+  const statestate   = useSelector(state =>   state.state);
+  const citystate   = useSelector(state =>    state.city);
+  const countrystate = useSelector(state =>   state.country);
+  const phonestate     = useSelector(state => state.phonenumber);
+  const instructionstate     = useSelector(state => state.instruction);
+  const shipmentOptions = useSelector(state => state.shipmentOptions.shipmentType) ;
+
+
+
+ 
   const handleback = (event: { preventDefault: () => void; }) => {
     event.preventDefault(); 
-  dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted-1 }); 
+  dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted-1, value1: firstNamestate, value2: lastNamestate, value3: companystate, value4: addressstate, value5: apartmentstate,
+  value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystate, value10: phonestate , value12: emailstate  }); 
   
+}
+const handlebacktocustomer = (event: { preventDefault: () => void; }) => {
+  event.preventDefault(); 
+dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted-2, value1: firstNamestate, value2: lastNamestate, value3: companystate, value4: addressstate, value5: apartmentstate,
+value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystate, value10: phonestate , value12: emailstate  }); 
+
 }
 
 const handleSubmit = (event: { preventDefault: () => void; }) => {
   event.preventDefault(); 
-dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 }); 
+dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 , value13: instructionstate , value1: firstNamestate, value2: lastNamestate, value3: companystate, value4: addressstate, value5: apartmentstate,
+value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystate, value10: phonestate , value12: emailstate 
+ }); 
 
 }
+
+
  
 
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -27,31 +57,9 @@ dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 });
     setPaymentMethod(event.target.value);
   };
 
-  useEffect(() => {
-    Swell.payment.createElements({
-      paypal: {
-        elementId: '#paypal-button',
-        style: {
-          layout: 'horizontal',
-          color: 'blue',
-          shape: 'rect',
-          label: 'buynow',
-          tagline: false,
-        },
-        onSuccess: () => {
-          Swell.cart.submitOrder();
-        },
-        onError: (error: any) => {
-          console.log('onError', error);
-        },
-      },
-    });
-   
   
-  
-  }, []);
 
-
+ 
 
 
   return (
@@ -66,23 +74,23 @@ dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 });
     <thead>
       <tr className="text-left text-sm">
         <td className="px-4 py-2">Contact</td>
-        <td className="px-4 py-2">John Doe</td>
-        <td className="px-4 py-2"><button className='text-xs text-custom-200' >change</button></td>
+        <td className="px-4 py-2">{emailstate}</td>
+        <td className="px-4 py-2"><button onClick={handlebacktocustomer}  className='text-xs text-custom-200' >change</button></td>
 
       </tr>
     </thead>
     <tbody>
       <tr  className="border-t text-left text-sm" >
         <td className="px-4 py-2">Shipping Address</td>
-        <td className="px-4 py-2">123 Main Street</td>
-        <td className="px-4 py-2"><button className='text-xs text-custom-200' >change</button></td>
+        <td className="px-4 py-2">{countrystate} {statestate} {citystate} <br></br> {addressstate} {companystate} {apartmentstate}</td>
+        <td className="px-4 py-2"><button onClick={handlebacktocustomer} className='text-xs text-custom-200' >change</button></td>
       </tr>
     </tbody>
     <tbody>
       <tr  className="border-t text-left text-sm" >
         <td className="px-4 py-2">method</td>
         <td className="px-4 py-2">-express Shipping <br></br> -standard shipping </td>
-        <td className="px-4 py-2"><button className='text-xs text-custom-200' >change</button></td>
+        <td className="px-4 py-2"><button onClick={handleback} className='text-xs text-custom-200' >change</button></td>
       </tr>
     </tbody>
   </table>
@@ -106,6 +114,10 @@ dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 });
       </tr>
     </thead>
     </table>
+
+    <div>
+      <button>paypal</button>
+    </div>
 
 
     <div>

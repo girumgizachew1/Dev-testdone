@@ -2,72 +2,46 @@ import  { useEffect, useState } from "react";
 import React  from 'react'
 import Splitdelivery from "./splitdelivery";
 import type { CartItem, ListResult } from 'swell-js';
-import fetch from 'isomorphic-unfetch';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
 import { getPrice } from '@/utils/product';
 
-function shippment({
-  items,
-  discount_total,
-  sub_total,
-  grand_total,
-  tax_total,
-  promotions,
-}: {
-  items: Array<CartItem>;
-  discount_total: number;
-  total: number;
-  sub_total: number;
-  tax_total: number;
-  promotions: ListResult<any>;
-  grand_total: number;
-}) {
+function shippment({ items, discount_total,  sub_total,  grand_total,  tax_total,  promotions,}: {  items: Array<CartItem>;  discount_total: number;  total: number;  sub_total: number; tax_total: number;promotions: ListResult<any>; grand_total: number;}) {
+  
   const [instruction, setInstruction] = useState('');
   const dispatch = useDispatch();
-  const [shippingServices, setShippingServices] = useState([]);
 
   const currentStepaccepted = useSelector(state => state.currentStep);
+  const firstNamestate = useSelector(state => state.firstName);
+  const lastNamestate  = useSelector(state => state.lastName);
+  const companystate   = useSelector(state => state.company);
+  const addressstate   = useSelector(state => state.address);
+  const apartmentstate = useSelector(state => state.apartment);
+  const emailstate     = useSelector(state => state.email);
+  const zipcodestate  = useSelector(state => state.zipcode);
+  const statestate   = useSelector(state => state.state);
+  const citystate   = useSelector(state => state.city);
+  const countrystate = useSelector(state => state.country);
+  const phonestate     = useSelector(state => state.phonenumber);
 
+ 
   const handleback = (event: { preventDefault: () => void; }) => {
     event.preventDefault(); 
-  dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted-1 }); 
+  dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted-1, value1: firstNamestate, value2: lastNamestate, value3: companystate, value4: addressstate, value5: apartmentstate,
+  value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystate, value10: phonestate , value12: emailstate  }); 
   
 }
 
 const handleSubmit = (event: { preventDefault: () => void; }) => {
   event.preventDefault(); 
-dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 , value13: instruction 
+dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 , value13: instruction , value1: firstNamestate, value2: lastNamestate, value3: companystate, value4: addressstate, value5: apartmentstate,
+value6: zipcodestate, value7: statestate, value8: citystate, value9: countrystate, value10: phonestate , value12: emailstate 
  }); 
 
 }
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch('https://paste.laravel.io/19686aff-394e-4f2b-9dbb-faa09db8253a');
-        const data = await res.json();
-        console.log(data)
-
-        setShippingServices(data);
-        
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchData();
-  }, [1]);
-  console.log(shippingServices)
-
-  const firstName = useSelector(state => state.firstName);
-  const lastName  = useSelector(state => state.lastName);
-  const company   = useSelector(state => state.company);
-  const address   = useSelector(state => state.address);
-  const apartment = useSelector(state => state.apartment);
-  const email     = useSelector(state => state.email);
 
 
    // Use state variables to track the current step
@@ -89,7 +63,7 @@ dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 , value13: in
       <thead>
         <tr className="text-left text-sm">
           <td className="px-4 py-2">Contact</td>
-          <td className="px-4 py-2">{firstName} {lastName} <br></br> {email}</td>
+          <td className="px-4 py-2">{firstNamestate} {lastNamestate} <br></br> {emailstate}</td>
           <td className="px-4 py-2"><button onClick={handleback} className='text-xs text-custom-200' >change</button></td>
 
         </tr>
@@ -97,7 +71,7 @@ dispatch({ type: 'SET_INPUT_VALUES',value11: currentStepaccepted+1 , value13: in
       <tbody>
         <tr  className="border-t text-left text-sm" >
           <td className="px-4 py-2">Shipping Address</td>
-          <td className="px-4 py-2">{firstName} {lastName} {company} <br></br> {apartment} {address}</td>
+          <td className="px-4 py-2">{countrystate} {statestate} {citystate} <br></br> {addressstate} {companystate} {apartmentstate}</td>
           <td className="px-4 py-2"><button onClick={handleback} className='text-xs text-custom-200' >change</button></td>
         </tr>
       </tbody>

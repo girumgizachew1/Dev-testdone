@@ -21,7 +21,8 @@ function splitdelivery({
 
 }) { 
   
-
+  const price1=10
+  const price2=20
   const shipmentOptions = useSelector((state: State) => state.shipmentOptions);
   console.log(shipmentOptions)
   const [expressOptionSelected, setExpressOptionSelected] = useState(false);
@@ -83,7 +84,7 @@ function splitdelivery({
          Standard Shipping
           
         </label>
-        <div className='text-sm' >free</div>
+        <div className='text-sm' >{price1}$</div>
 
       </div>
 
@@ -102,7 +103,7 @@ function splitdelivery({
           />
           Express Shipping
         </label>
-        <div className='text-sm' >free</div>
+        <div className='text-sm' >{price2}$</div>
       </div>
     </div>
   </div>

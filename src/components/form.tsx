@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState , useEffect } from "react"
 import react from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -6,17 +6,35 @@ import { useSelector } from 'react-redux';
 
 
 export default function CheckoutForm() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [company, setCompany] = useState('');
-  const [address, setAddress] = useState('');
-  const [apartment, setApartment] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [phone, setPhone] = useState('');
+
+  const firstNamestate = useSelector(state => state.firstName);
+  const lastNamestate  = useSelector(state => state.lastName);
+  const companystate   = useSelector(state => state.company);
+  const addressstate   = useSelector(state => state.address);
+  const apartmentstate = useSelector(state => state.apartment);
+  const emailstate     = useSelector(state => state.email);
+  const zipcodestate  = useSelector(state => state.zipcode);
+  const statestate   = useSelector(state => state.state);
+  const citystate   = useSelector(state => state.city);
+  const countrystate = useSelector(state => state.country);
+  const phonestate     = useSelector(state => state.phonenumber);
+ 
+  
+  const [email, setEmail] = useState(emailstate);
+  const [firstName, setFirstName] = useState(firstNamestate);
+  const [lastName, setLastName] = useState(lastNamestate);
+  const [company, setCompany] = useState(companystate);
+  const [address, setAddress] = useState(addressstate);
+  const [apartment, setApartment] = useState(apartmentstate);
+  const [zipCode, setZipCode] = useState(zipcodestate);
+  const [city, setCity] = useState(citystate);
+  const [state, setState] = useState(statestate);
+  const [country, setCountry] = useState(countrystate);
+  const [phone, setPhone] = useState(phonestate);
+  console.log(emailstate)
+
+
+
 
   const currentStepaccepted = useSelector(state => state.currentStep);
 
@@ -96,7 +114,7 @@ export default function CheckoutForm() {
           <input
             type="text"
             name="mail"
-            placeholder="E-mail" 
+            placeholder="email"
             value={email}
             required
             onChange={(event) => setEmail(event.target.value)}
@@ -187,7 +205,7 @@ export default function CheckoutForm() {
             type="text"
             name="mail"
             placeholder="Zipcode*"
-            value={address}
+            value={zipCode}
             onChange={(event) => setZipCode(event.target.value)}
             className={`mt-3 h-9 w-full rounded border px-2 text-xs placeholder:text-zinc-500 focus:border-gray-500 focus:outline-none ${!validity.field5 ? 'border-red-500' : ''}`}
             />

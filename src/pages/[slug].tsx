@@ -20,8 +20,6 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
     process.env.NEXT_SWELL_PUBLIC_STORE as string,
     process.env.NEXT_SWELL_PUBLIC_API_TOKEN as string
   );
-
-
   const currentStepaccepted = useSelector(state => state.currentStep);
 
   // Initialize the client first
