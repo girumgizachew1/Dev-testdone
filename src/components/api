@@ -1,0 +1,86 @@
+{
+  "shipment_rating": {
+    "services": [
+      {
+        "id": "custom",
+        "name": "Split deliveries",
+        "price": 0,
+        "custom_shipping_fields": [
+          {
+            "id": "FROTHER_POD_DELIVERY",
+            "isSplitDelivery": true,
+            "hasAtl": false,
+            "total_price": 50,
+            "currency": "AUD",
+            "locality": "regional",
+            "message": "test message.",
+            "total_days": 5,
+            "min_delivery_date": "2022-01-11 11:01:24",
+            "max_delivery_date": "2022-01-11 19:01:24",
+            "deliveries": [
+              {
+                "carrier_id": 91,
+                "carrier_name": "Auspost",
+                "variants": [
+                  {
+                    "id": 12322,
+                    "sku": "FROTHER",
+                    "quantity": 1
+                  },
+                  {
+                    "id": 12325,
+                    "sku": "PODS",
+                    "quantity": 3
+                  }
+                ],
+                "services": [
+                  {
+                    "carrierservice_id": 87,
+                    "eta_date": "2022-01-11 19:01:24",
+                    "name": "Ausport Express Shipping",
+                    "isSelected": false,
+                    "price": 30
+                  },
+                  {
+                    "carrierservice_id": 89,
+                    "eta_date": "2022-02-11 19:01:24",
+                    "name": "Ausport standard Shipping",
+                    "isSelected": false,
+                    "price": 0
+                  }
+                ]
+              },
+              {
+                "carrier_id": 91,
+                "carrier_name": "Auspost",
+                "variants": [
+                  {
+                    "id": 123202,
+                    "sku": "MACHINE",
+                    "quantity": 1
+                  }
+                ],
+                "services": [
+                  {
+                    "carrierservice_id": 87,
+                    "eta_date": "2022-01-11 19:01:24",
+                    "name": "Express Shipping",
+                    "isSelected": false,
+                    "price": 30
+                  },
+                  {
+                    "carrierservice_id": 89,
+                    "eta_date": "2022-02-11 19:01:24",
+                    "name": "Free Shipping",
+                    "isSelected": false,
+                    "price": 0
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

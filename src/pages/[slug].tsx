@@ -9,8 +9,11 @@ import PaymentForm from '@/components/payment';
 
 import Loader from '@/components/loading';
 import OrderSummary from '@/components/order_summary';
+import OrderSummaryForshipment from '@/components/order_summary For_Shippment';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+import { useSelector } from 'react-redux';
+
 
 const Index = ({ checkout_id }: { checkout_id: string }) => {
   swell.init(
@@ -19,11 +22,12 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
   );
 
 
-  
-  // Initialize the client first
+  const currentStepaccepted = useSelector(state => state.currentStep);
 
+  // Initialize the client first
   const [loading, setLoading] = useState<boolean>(false);
   const [cart, setCart] = useState<Cart | any>(null);
+  
   useEffect(() => {
     setLoading(true);
     // @ts-ignore
@@ -34,35 +38,17 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
   }, []);
 
    // Use state variables to track the current step
-   const [currentStep, setCurrentStep] = useState(1);
-
-   // Function to navigate to the next step
-   const handleNext = () => {
-     setCurrentStep(currentStep + 1);
-   };
- 
-   // Function to navigate to the previous step
-   const handlePrev = () => {
-     setCurrentStep(currentStep - 1);
-   };
 
    
   // Render the appropriate step based on the current step
   let stepContent;
-  switch (currentStep) {
+  switch (currentStepaccepted) {
     case 1:
       stepContent = (
         <div className=''>
           {/* Customer information form */}
           <CustomerForm />
-          <div className='flex justify-between mt-5'>
-          <button  
-            className="h-12 w-24 text-xs font-medium text-custom-200"
-            >Return To home</button>
-          <button
-            className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
-            onClick={handleNext}>Continue to Shipping</button>
-        </div>
+          
         </div>
       );
       break;
@@ -70,15 +56,8 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
       stepContent = (
         <div>
           {/* Shipping information form */}
-          <ShippmentForm />
-          <div className='flex justify-between mt-5'>
-          <button 
-          className="h-12 w-24 text-xs font-medium text-custom-200"
-          onClick={handlePrev}>Back</button>
-          <button 
-          className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
-          onClick={handleNext}>Continue To Payment</button>
-        </div>
+          <ShippmentForm {...cart} />
+          
         </div>
       );
       break;
@@ -87,14 +66,7 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
         <div>
           {/* Payment form */}
           <PaymentForm />
-          <div className='flex justify-between mt-5'>
-          <button 
-          className="h-12 w-24 text-xs font-medium text-custom-200"
-          onClick={handlePrev}>Back</button>
-          <button 
-          className="h-12 w-48 rounded bg-custom-200 text-xs font-medium text-white" 
-          onClick={handleNext}>Complete Order</button>
-        </div>
+         
         </div>
       );
       break;
@@ -131,9 +103,9 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
                 <hr className=" w-full border-gray-400" />
                 {/* Circles for eachstep */}
                 <div className="flex justify-between items-center -mt-3 ">
-                <div className={`w-6 h-6 rounded-full ${ currentStep >= 1 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
-                <div className={`w-6 h-6 rounded-full ${ currentStep >= 2 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
-                <div className={`w-6 h-6 rounded-full ${ currentStep >= 3 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                <div className={`w-6 h-6 rounded-full ${ currentStepaccepted >= 1 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                <div className={`w-6 h-6 rounded-full ${ currentStepaccepted >= 2 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
+                <div className={`w-6 h-6 rounded-full ${ currentStepaccepted >= 3 ? 'bg-gray-800' : 'bg-gray-300' }`}/>
                 </div>
 
 
@@ -141,21 +113,21 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
                     <ul className="flex justify-between items-center text-lg font-medium">
                         <li
                           className={`cursor-pointer ${
-                            currentStep === 1 ? 'text-gray-900' : 'text-gray-500'
+                            currentStepaccepted === 1 ? 'text-gray-900' : 'text-gray-500'
                           }`}
                         >
                           Customer
                         </li>
                           <li
                             className={`cursor-pointer ${
-                              currentStep === 2 ? 'text-gray-900' : 'text-gray-500'
+                              currentStepaccepted === 2 ? 'text-gray-900' : 'text-gray-500'
                             }`}
                           >
                             Shipping
                           </li>
                           <li
                             className={`cursor-pointer ${
-                              currentStep === 3 ? 'text-gray-900' : 'text-gray-500'
+                              currentStepaccepted === 3 ? 'text-gray-900' : 'text-gray-500'
                             }`}
                           >
                             Payment
@@ -168,7 +140,8 @@ const Index = ({ checkout_id }: { checkout_id: string }) => {
           </div>
             </div>
           </div>
-          {cart !== null && <OrderSummary {...cart} />}
+          {cart !== null  && <OrderSummary {...cart} />}
+
         </div>
       </div>
     </Main>
