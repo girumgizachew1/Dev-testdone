@@ -1,23 +1,36 @@
 import { useState  } from "react"
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-
+interface State {
+  firstName: string;
+  lastName: string;
+  company: string;
+  address: string;
+  apartment: string;
+  email: string;
+  zipcode: string;
+  state: string;
+  city: string;
+  country: string;
+  phonenumber: string;
+  currentStep: number;
+}
 
 
 export default function CheckoutForm() {
 
-  const firstNamestate = useSelector(state => state.firstName);
-  const lastNamestate  = useSelector(state => state.lastName);
-  const companystate   = useSelector(state => state.company);
-  const addressstate   = useSelector(state => state.address);
-  const apartmentstate = useSelector(state => state.apartment);
-  const emailstate     = useSelector(state => state.email);
-  const zipcodestate  = useSelector(state => state.zipcode);
-  const statestate   = useSelector(state => state.state);
-  const citystate   = useSelector(state => state.city);
-  const countrystate = useSelector(state => state.country);
-  const phonestate     = useSelector(state => state.phonenumber);
- 
+  const firstNamestate = useSelector<State, string>(state => state.firstName);
+  const lastNamestate  = useSelector<State, string>(state => state.lastName);
+  const companystate   = useSelector<State, string>(state => state.company);
+  const addressstate   = useSelector<State, string>(state => state.address);
+  const apartmentstate = useSelector<State, string>  (state => state.apartment);
+  const emailstate     = useSelector<State, string> (state => state.email);
+  const zipcodestate  = useSelector<State, string> (state => state.zipcode);
+  const statestate   = useSelector<State, string> (state => state.state);
+  const citystate   = useSelector <State, string> (state => state.city);
+  const countrystate = useSelector <State, string> (state => state.country);
+  const phonestate     = useSelector<State, string>(state => state.phonenumber);
+  const currentStepaccepted = useSelector<State, number>(state => state.currentStep);
   
   const [email, setEmail] = useState(emailstate);
   const [firstName, setFirstName] = useState(firstNamestate);
@@ -35,7 +48,7 @@ export default function CheckoutForm() {
 
 
 
-  const currentStepaccepted = useSelector(state => state.currentStep);
+  
 
   const [currentStep, setCurrentStep] = useState(1);
 
