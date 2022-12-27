@@ -30,8 +30,7 @@ export default function CheckoutForm() {
   const citystate   = useSelector <State, string> (state => state.city);
   const countrystate = useSelector <State, string> (state => state.country);
   const phonestate     = useSelector<State, string>(state => state.phonenumber);
-//  const currentStepaccepted = useSelector<State, number>(state => state.currentStep);
-  
+
   const [email, setEmail] = useState(emailstate);
   const [firstName, setFirstName] = useState(firstNamestate);
   const [lastName, setLastName] = useState(lastNamestate);

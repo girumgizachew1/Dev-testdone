@@ -30,16 +30,16 @@ function reducer(state: typeof initialState = initialState, action: any): typeof
     case 'UPDATE_SHIPMENT_OPTION':
           const { productId, shipmentType } = action.payload;
           
-        return {
-          ...state,
-          shipmentOptions: {
-            ...state.shipmentOptions,
-            [productId]: {
-              ...state.shipmentOptions[productId],
-              shipmentType,
+          return {
+            ...state,
+            shipmentOptions: {
+              ...state.shipmentOptions,
+              [productId]: {
+                ...state.shipmentOptions[productId],
+                shipmentType,
+              },
             },
-          },
-        };
+          };
       
    
         default:
