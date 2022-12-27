@@ -12,14 +12,16 @@ import OrderSummary from '@/components/order_summary';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 import { useSelector } from 'react-redux';
-
+interface State {
+  currentStep: number;
+ }
 
 const Index = ({ checkout_id }: { checkout_id: string }) => {
   swell.init(
     process.env.NEXT_SWELL_PUBLIC_STORE as string,
     process.env.NEXT_SWELL_PUBLIC_API_TOKEN as string
   );
-  const currentStepaccepted = useSelector(state => state.currentStep);
+  const currentStepaccepted = useSelector<State, number>(state => state.currentStep);
 
   // Initialize the client first
   const [loading, setLoading] = useState<boolean>(false);

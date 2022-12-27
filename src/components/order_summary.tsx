@@ -6,6 +6,9 @@ import swell from 'swell-js';
 import { useSelector } from 'react-redux';
 import OrderSummarySplitDelivery from './order_summary_splitdelivery'
 import OrderSummaryPayment from './order_summary_payment'
+interface State {
+  currentStep: number;
+ }
 
 export default function OrderSummary({
   items,
@@ -29,7 +32,7 @@ export default function OrderSummary({
   const [couponCode, setCouponCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const currentStepaccepted = useSelector(state => state.currentStep);
+  const currentStepaccepted = useSelector<State, number>(state => state.currentStep);
 
   console.log(currentStepaccepted)
 
@@ -42,7 +45,7 @@ export default function OrderSummary({
     try {
       console.log(couponCode)
       const result = await swell.cart.applyCoupon(couponCode);
-      setSuccessMessage(`Coupon applied successfully: ${result.discount_amount} discount applied.`);
+      setSuccessMessage(`Coupon applied successfully: ${result} discount applied.`);
     } catch (error) {
       setErrorMessage("please enter a valid coupon code");
     }

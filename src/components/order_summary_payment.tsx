@@ -6,7 +6,7 @@ import { useSelector} from 'react-redux';
 
 export default function OrderSummaryItem({length,  product,  price, variant, index,}: { item: object; product: Product;variant: ProductVariant; price: number;  length: number; index: number;}) {
   const id= product.id
-  const shipmentOptions = useSelector((state: State) => state.shipmentOptions[id].shipmentType) ;
+  const shipmentOptions = useSelector(state=> state.shipmentOptions[id].shipmentType) ;
 
   
   return (
