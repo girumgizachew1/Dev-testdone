@@ -1,7 +1,28 @@
 import { createStore } from 'redux';
 
+interface State {
+  firstName: string;
+  lastName: string;
+  company: string;
+  address: string;
+  apartment: string;
+  email: string;
+  zipcode: string;
+  state: string;
+  city: string;
+  country: string;
+  phonenumber: string;
+  currentStep: number;
+  instruction: string,
+  shipmentOptions: {
+    [productId: string]: {
+      shipmentType: string;
+    }
+  }
+}
 
-const initialState = {
+
+const initialState : State= {
   
   firstName: '',
   lastName: '',
@@ -21,7 +42,9 @@ const initialState = {
 
 
 
+
 function reducer(state: typeof initialState = initialState, action: any): typeof initialState {
+  
   switch (action.type) {
     case 'SET_INPUT_VALUES':
       return { ...state, firstName: action.value1, lastName: action.value2, company: action.value3, address: action.value4, 

@@ -3,10 +3,19 @@ import type { Product, ProductVariant } from 'swell-js';
 import { getPrice } from '@/utils/product';
 import { useSelector} from 'react-redux';
 
+type State = {
+  shipmentOptions: {
+    [productId: string]: {
+      shipmentType: string;
+    };
+  };
+  // other properties and methods
+};
+
 
 export default function OrderSummaryItem({length,  product,  price, variant, index,}: { item: object; product: Product;variant: ProductVariant; price: number;  length: number; index: number;}) {
   const id= product.id
-  const shipmentOptions = useSelector(state=> state.shipmentOptions[id].shipmentType) ;
+  const shipmentOptions = useSelector((state: State) => state.shipmentOptions[id]?.shipmentType);
 
   
   return (

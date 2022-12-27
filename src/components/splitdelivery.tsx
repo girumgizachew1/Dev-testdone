@@ -3,7 +3,14 @@ import  { useState } from "react";
 import type { Product, ProductVariant } from 'swell-js';
 import { useSelector, useDispatch } from 'react-redux';
 
-
+type State = {
+  shipmentOptions: {
+    [productId: string]: {
+      shipmentType: string;
+    };
+  };
+  // other properties and methods
+};
 function splitdelivery({
   product,
   index, 
